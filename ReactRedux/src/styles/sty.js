@@ -8,15 +8,23 @@ export  const styles = StyleSheet.create({
             backgroundColor: '#dfe6e9'
         },
         button:{
-            width: 30,
-            height: 45,
+            width: 35,
+            height: 30,
             backgroundColor: '#0984e3', 
             borderRadius:25,
             marginVertical: 10,
-            paddingVertical: 12
+            paddingVertical: 0
+        },
+        buttonClear:{
+            width: 100,
+            height: 30,
+            backgroundColor: '#0984e3', 
+            borderRadius:25,
+            marginVertical: 10,
+            paddingVertical: 0
         },
         buttonText:{
-            fontSize: 16,
+            fontSize: 20,
             fontWeight: '500',
             color: '#ffff',
             textAlign: 'center'
