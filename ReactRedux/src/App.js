@@ -1,8 +1,8 @@
 import React, {Fragment, Component} from 'react'
-import {View, Text, TouchableOpacity} from 'react-native'
+import {View, Text, TouchableOpacity, TextInput, setState} from 'react-native'
 
 import { connect } from 'react-redux'
-import { counterIncrement, counterDecrement } from './actions/counterActions'
+import { counterIncrement, counterDecrement, counterClear, counterSet} from './actions/counterActions'
 
 
 
@@ -15,22 +15,19 @@ class App extends Component{
    this.state = { 
      count: 0 
     };
- }
-  
-  decrementCount = () => {
 
-    this.setState({ count: this.state.count - 1 })
+    this.onChangeText = this.onChangeText.bind(this);
+ }
+
+  onChangeText(number){
+    const count = parseInt(number);
+    this.props.counterSet(count);
   }
-  incrementCount = () => {
-  
-    this.setState({ count: this.state.count + 1 })
-  }
-  clearCount = () => {
    
-    this.setState({ count: 0 })
-  }
 render(){
   console.log(this.props);
+  console.log(this.state.count);
+
   return(
     
     <View style={styles.container}>
@@ -39,12 +36,17 @@ render(){
         onPress={this.props.counterIncrement}>
           <Text style={styles.buttonText}> + </Text>
       </TouchableOpacity>
-      <Text style={styles.title}>
-            {this.state.count}
-        </Text>
+
+      <TextInput style={styles.input}
+        placeholder='#'
+        onChangeText={this.onChangeText}
+        value={this.props.count.toString()}
+        />
+        
         <Text style={styles.title}>
             {this.props.count}
         </Text>
+        
         <TouchableOpacity style={styles.button}
         onPress={this.props.counterDecrement}>
           <Text style={styles.buttonText}> - </Text>
@@ -52,7 +54,7 @@ render(){
 
       </View>
       <TouchableOpacity style={styles.buttonClear}
-        onPress={this.clearCount}>
+        onPress={this.props.counterClear}>
           <Text style={styles.buttonText}> CLEAR </Text>
       </TouchableOpacity>
     </View>
@@ -64,4 +66,4 @@ mapStateToProps = (state) =>{
     count: state
   }
 }
-export default connect(mapStateToProps, {counterIncrement, counterDecrement})(App);
+export default connect(mapStateToProps, {counterIncrement, counterDecrement, counterClear, counterSet})(App);
