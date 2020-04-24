@@ -1,7 +1,13 @@
 import React, {Fragment, Component} from 'react'
-import {View, Text, TouchableOpacity, setState} from 'react-native'
+import {View, Text, TouchableOpacity} from 'react-native'
 
-import {styles} from './src/styles/sty.js';
+import { connect } from 'react-redux'
+import { counterIncrement, counterDecrement } from './actions/counterActions'
+
+
+
+import {styles} from './styles/sty';
+
 
 class App extends Component{
  constructor(props){
@@ -13,30 +19,34 @@ class App extends Component{
   
   decrementCount = () => {
 
-    this.setState({count: this.state.count -1})
+    this.setState({ count: this.state.count - 1 })
   }
   incrementCount = () => {
   
-    this.setState({count: this.state.count +1})
+    this.setState({ count: this.state.count + 1 })
   }
   clearCount = () => {
    
-    this.setState({count: 0 })
+    this.setState({ count: 0 })
   }
 render(){
+  console.log(this.props);
   return(
     
     <View style={styles.container}>
       <View>
       <TouchableOpacity style={styles.button}
-        onPress={this.incrementCount}>
+        onPress={this.props.counterIncrement}>
           <Text style={styles.buttonText}> + </Text>
       </TouchableOpacity>
       <Text style={styles.title}>
             {this.state.count}
         </Text>
+        <Text style={styles.title}>
+            {this.props.count}
+        </Text>
         <TouchableOpacity style={styles.button}
-        onPress={this.decrementCount}>
+        onPress={this.props.counterDecrement}>
           <Text style={styles.buttonText}> - </Text>
       </TouchableOpacity>
 
@@ -48,4 +58,10 @@ render(){
     </View>
   );
 }
-}export default App;
+}
+mapStateToProps = (state) =>{
+  return{
+    count: state
+  }
+}
+export default connect(mapStateToProps, {counterIncrement, counterDecrement})(App);

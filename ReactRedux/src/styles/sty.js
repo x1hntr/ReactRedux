@@ -11,9 +11,8 @@ export  const styles = StyleSheet.create({
             width: 35,
             height: 30,
             backgroundColor: '#0984e3', 
-            borderRadius:25,
+            //borderRadius:25,
             marginVertical: 10,
-            paddingVertical: 0
         },
         buttonClear:{
             width: 100,
@@ -31,6 +30,7 @@ export  const styles = StyleSheet.create({
         },
         title:{
             fontSize: 20,
+            marginHorizontal: 8,
             marginBottom: 16,
             color: 'white'
         },
